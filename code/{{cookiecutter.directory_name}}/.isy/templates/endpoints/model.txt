@@ -1,0 +1,39 @@
+from typing import Any, Dict, List
+from sqlalchemy import Column, Integer, String
+from ..BaseModel import BaseModel
+
+class {model_name}(BaseModel):
+    """ Table {model_name} Database model
+
+    Args:
+        BaseModel (ORMClass): Parent class
+
+    Returns:
+        {model_name}: Instance of model
+    """
+    __tablename__ = '{table_name}'
+    id = Column("id", Integer, primary_key=True)
+    
+    model_path_name = "{model_name_lower}"
+
+    filter_columns = []
+    relationship_names = []
+    search_columns = []
+    
+    @classmethod
+    def property_map(self) -> Dict:
+        return {{
+            "Id{model_name}": "id"
+        }}
+    
+    @classmethod
+    def display_members(cls_) -> List[str]:
+        return [
+            "id"
+        ]
+    
+    @classmethod
+    def rules_for_store(cls_) -> Dict[str, List[Any]]:
+        return {{
+            
+        }}

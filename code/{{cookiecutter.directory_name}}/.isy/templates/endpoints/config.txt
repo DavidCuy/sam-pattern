@@ -1,0 +1,115 @@
+Resources:
+  GetAll{model_name}Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/lambdas/{model_name_snake}/
+      ReservedConcurrentExecutions: 25
+      Handler: get_all.lambda_handler
+      Role: !GetAtt LambdaAppCoreRole.Arn
+      Layers:
+        - !Ref CoreAppLayer
+        - !Ref DBClientLayer
+      Environment:
+        Variables:
+          APP_NAME: !Ref AppName
+          ENVIRONMENT: !Ref Environment
+          POWERTOOLS_SERVICE_NAME: get-{model_name_snake}
+      Events:
+        Get{model_name}:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiCore
+            Path: /{model_name_snake}
+            Method: get
+
+  Find{model_name}Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/lambdas/{model_name_snake}/
+      ReservedConcurrentExecutions: 25
+      Handler: controller.index_lambda_handler
+      Role: !GetAtt LambdaAppCoreRole.Arn
+      Layers:
+        - !Ref CoreAppLayer
+        - !Ref DBClientLayer
+      Environment:
+        Variables:
+          APP_NAME: !Ref AppName
+          ENVIRONMENT: !Ref Environment
+          POWERTOOLS_SERVICE_NAME: find-{model_name_snake}
+      Events:
+        Get{model_name}Function:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiCore
+            Path: /{model_name_snake}/{id}
+            Method: get
+
+  Store{model_name}Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/lambdas/{model_name_snake}/
+      ReservedConcurrentExecutions: 25
+      Handler: controller.store_lambda_handler
+      Role: !GetAtt LambdaAppCoreRole.Arn
+      Layers:
+        - !Ref CoreAppLayer
+        - !Ref DBClientLayer
+      Environment:
+        Variables:
+          APP_NAME: !Ref AppName
+          ENVIRONMENT: !Ref Environment
+          POWERTOOLS_SERVICE_NAME: store-{model_name_snake}
+      Events:
+        Get{model_name}:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiCore
+            Path: /{model_name_snake}
+            Method: post
+
+  Update{model_name}Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/lambdas/{model_name_snake}/
+      ReservedConcurrentExecutions: 25
+      Handler: controller.update_lambda_handler
+      Role: !GetAtt LambdaAppCoreRole.Arn
+      Layers:
+        - !Ref CoreAppLayer
+        - !Ref DBClientLayer
+      Environment:
+        Variables:
+          APP_NAME: !Ref AppName
+          ENVIRONMENT: !Ref Environment
+          POWERTOOLS_SERVICE_NAME: update-{model_name_snake}
+      Events:
+        Get{model_name}:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiCore
+            Path: /{model_name_snake}/{id}
+            Method: put
+
+  Delete{model_name}Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/lambdas/{model_name_snake}/
+      ReservedConcurrentExecutions: 25
+      Handler: controller.delete_lambda_handler
+      Role: !GetAtt LambdaAppCoreRole.Arn
+      Layers:
+        - !Ref CoreAppLayer
+        - !Ref DBClientLayer
+      Environment:
+        Variables:
+          APP_NAME: !Ref AppName
+          ENVIRONMENT: !Ref Environment
+          POWERTOOLS_SERVICE_NAME: delete-{model_name_snake}
+      Events:
+        Get{model_name}:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiCore
+            Path: /{model_name_snake}/{id}
+            Method: delete

@@ -1,0 +1,37 @@
+from aws_lambda_powertools import Logger, Tracer
+from core_db.services import {model_name}Service
+from core_http.BaseController import index, find, store, update, delete
+
+logger = Logger()
+tracer = Tracer()
+
+service = {model_name}Service()
+
+@logger.inject_lambda_context(log_event=True)
+@tracer.capture_lambda_handler
+def index_lambda_handler(event, context):
+    return index(service, event)
+
+
+@logger.inject_lambda_context(log_event=True)
+@tracer.capture_lambda_handler
+def find_lambda_handler(event, context):
+    return find(service, event)
+
+
+@logger.inject_lambda_context(log_event=True)
+@tracer.capture_lambda_handler
+def store_lambda_handler(event, context):
+    return store(service, event)
+
+
+@logger.inject_lambda_context(log_event=True)
+@tracer.capture_lambda_handler
+def update_lambda_handler(event, context):
+    return update(service, event)
+
+
+@logger.inject_lambda_context(log_event=True)
+@tracer.capture_lambda_handler
+def delete_lambda_handler(event, context):
+    return delete(service, event)
