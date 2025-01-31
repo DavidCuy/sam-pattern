@@ -6,6 +6,8 @@
     "api_description": "API description",
     "api_url": "http://localhost:1234",
     "environment": "dev",
+    "from_secret": false,
+    "secret_name": "DBPassword",
     "dbDialect": ["mysql", "postgresql"],
     "db_host": "localhost",
     "db_user": "",

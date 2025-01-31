@@ -7,7 +7,7 @@ LOGGER = Logger('layers.app_core.core_db.config')
 def get_db_from_secrets():
     global DB_DRIVER, DB_NAME, DB_CONNECTION_STRING
     
-    credentials = get_secret('DBPassword', is_dict=True, use_prefix=True)
+    credentials = get_secret('{{ cookiecutter.secret_name }}', is_dict=True, use_prefix=False)
     LOGGER.info(f"Credentials: {credentials}")
     DB_ENGINE = credentials.get('engine', 'db-engine')
     DB_DRIVER = credentials.get('driver', 'db-driver')
