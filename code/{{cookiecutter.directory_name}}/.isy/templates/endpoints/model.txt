@@ -22,9 +22,9 @@ class {model_name}(BaseModel):
     
     @classmethod
     def property_map(self) -> Dict:
-        return {{
+        return {% raw %} {
             "Id{model_name}": "id"
-        }}
+        } {% endraw %}
     
     @classmethod
     def display_members(cls_) -> List[str]:
