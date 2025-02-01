@@ -34,6 +34,4 @@ class {model_name}(BaseModel):
     
     @classmethod
     def rules_for_store(cls_) -> Dict[str, List[Any]]:
-        return {{
-            
-        }}
+        return {% raw %} { } {% endraw %}
