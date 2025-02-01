@@ -1,0 +1,16 @@
+[isy.project.definition]
+name = "{{ cookiecutter.project_name }}"
+description = ""
+
+[isy.template.files]
+model = ".isy/templates/endpoints/model.txt"
+service = ".isy/templates/endpoints/service.txt"
+lambdaEndpoint = ".isy/templates/endpoints/controller.txt"
+endpointConf = ".isy/templates/endpoints/config.txt"
+
+[isy.project.folders]
+models = "src/layers/app_core/core_db/models"
+services = "src/layers/app_core/core_db/services"
+lambdas = "src/lambdas"
+jsons = ".isy/templates/json"
+apiDefinition = "core_api.yaml"
